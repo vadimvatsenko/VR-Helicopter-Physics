@@ -13,8 +13,13 @@ namespace Rotors
         [SerializeField] protected float maxPitch = 35f;
 
         public Action<float> OnRotate;
-        public void UpdateRotor(float dps, BaseHeliInput input)
+        public void UpdateRotor(float rpm, BaseHeliInput input)
         {
+            // рахуємо градуси в секунду (dps)
+            float degree = 360f;
+            float seconds = 60f;
+            float dps = ((rpm * degree) / seconds) * Time.fixedDeltaTime;
+            
             float pitch = input.CollectiveInput * maxPitch;
             OnRotate?.Invoke(pitch);
             // оберт 
