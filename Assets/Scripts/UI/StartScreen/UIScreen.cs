@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI
 {
@@ -11,27 +9,21 @@ namespace UI
         private static readonly int Show = Animator.StringToHash("show");
         private static readonly int Hide = Animator.StringToHash("hide");
         
-        public Selectable startSelectable;
         private Animator _animator;
-
-        private Action _onScreenStart;
-        private Action _onScreenClose;
-
-        private void Start()
+        
+        private void OnEnable()
         {
             _animator = GetComponent<Animator>();
             HandleAnimation(Show);
         }
 
-        public virtual void StartScreen()
+        public virtual void ShowScreen()
         {
-            _onScreenStart?.Invoke();
             HandleAnimation(Show);
         }
 
         public virtual void CloseScreen()
         {
-            _onScreenClose?.Invoke();
             HandleAnimation(Hide);
         }
         

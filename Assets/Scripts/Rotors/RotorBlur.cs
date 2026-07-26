@@ -33,7 +33,7 @@ namespace Rotors
         {
             // Шаг 1: Приводим текущую скорость к диапазону от 0.0 до 1.0
             float normalizedDps = Mathf.InverseLerp(0f, maxDps, dps);
-            Debug.Log(normalizedDps);
+            //Debug.Log(normalizedDps);
             // 2. Масштабирует нормализованную скорость под размер коллекции текстур и округляет её вниз 
             // с помощью Mathf.FloorToInt, чтобы получить точный целочисленный индекс. 
             // Метод Mathf.Clamp страхует от выхода за пределы диапазона [0, blurTextures.Count - 1], 

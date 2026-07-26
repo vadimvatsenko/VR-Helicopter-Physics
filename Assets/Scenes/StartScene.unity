@@ -530,9 +530,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339456fb9b42f194db72aed73fc3bcfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UISystem
+  loginScreen: {fileID: 1145688999}
+  registerScreen: {fileID: 2035366218}
   imageFader: {fileID: 2111408116}
   fadeInDuration: 1
   fadeOutDuration: 1
+  toRegisterBtn: {fileID: 1241916218}
+  toLoginBtn: {fileID: 0}
+  backBtn: {fileID: 187501711}
 --- !u!1 &187501708
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,7 +643,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 187501710}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -4614,7 +4619,7 @@ Animator:
   m_GameObject: {fileID: 1145688993}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 65ec7f719c13b8c49bcc57846c688109, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4638,7 +4643,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fadb828900b9b944bbd10b44f7b4da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIScreen
-  startSelectable: {fileID: 0}
 --- !u!1 &1187317101
 GameObject:
   m_ObjectHideFlags: 0
@@ -4849,7 +4853,7 @@ GameObject:
   - component: {fileID: 1241916219}
   - component: {fileID: 1241916218}
   m_Layer: 0
-  m_Name: Button
+  m_Name: ToRegist_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6304,7 +6308,7 @@ Animator:
   m_GameObject: {fileID: 2035366214}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: bbfc9261b50f21b4ba43b254103f92d2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6328,7 +6332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fadb828900b9b944bbd10b44f7b4da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIScreen
-  startSelectable: {fileID: 0}
 --- !u!114 &2035366219
 MonoBehaviour:
   m_ObjectHideFlags: 0
