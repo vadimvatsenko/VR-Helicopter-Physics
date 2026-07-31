@@ -7,7 +7,7 @@ namespace InputSystem
     public class BaseHeliInput : MonoBehaviour
     {
         // Робити Sensitivity, занадто швидко йде перемикання між одниницею та нулем
-        [SerializeField] private float delayInput = 4; // зараз дуже швидко йде перемикання 
+        [SerializeField] private float delayInput = 4; 
         
         private InputSystem_Actions _inputSystemActions;
         

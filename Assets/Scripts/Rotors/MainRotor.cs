@@ -7,22 +7,28 @@ namespace Rotors
     public class MainRotor : MonoBehaviour, IRotor
     {
         [Header("Main Rotor Properties")] 
-        [SerializeField] private Transform lRotor;
-        [SerializeField] private Transform rRotor;
+        [SerializeField] protected Transform lFirstRotor;
+        [SerializeField] protected Transform rFirstRotor;
         // максимальний кут леза
-        [SerializeField] private float maxPitch = 35f;
+        [SerializeField] protected float maxPitch = 35f;
 
         public Action<float> OnRotate;
-        public void UpdateRotor(float dps, BaseHeliInput input)
+        public void UpdateRotor(float rpm, BaseHeliInput input)
         {
+            // рахуємо градуси в секунду (dps)
+            float degree = 360f;
+            float seconds = 60f;
+            float dps = ((rpm * degree) / seconds) * Time.fixedDeltaTime;
+            
             float pitch = input.CollectiveInput * maxPitch;
             OnRotate?.Invoke(pitch);
             // оберт 
-            transform.Rotate(Vector3.up, dps);
-            if (lRotor && rRotor)
+            transform.Rotate(Vector3.up, dps, Space.Self);
+            
+            if (lFirstRotor && rFirstRotor)
             {
-                lRotor.localRotation = Quaternion.Euler(0f, 0f, pitch);
-                rRotor.localRotation = Quaternion.Euler(0f, 0f, -pitch);
+                lFirstRotor.localRotation = Quaternion.Euler(pitch, 0f, 0f );
+                rFirstRotor.localRotation = Quaternion.Euler(-pitch, 0f, 0f);
             }
         }
     }

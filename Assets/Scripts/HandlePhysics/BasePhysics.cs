@@ -94,7 +94,7 @@ namespace HandlePhysics
             // AddRelativeTorque
             // обертає об'єкт навколо його власних, локальних осей.
             // Тобто осей, які прив'язані до корпусу вертольота і крутяться разом із ним.
-            float cyclicZForce = _input.CyclicInput.x * cyclingForce;
+            float cyclicZForce = -_input.CyclicInput.x * cyclingForce;
             _rb.AddRelativeTorque(Vector3.forward * cyclicZForce, ForceMode.Acceleration);
             
             float cyclicXForce = _input.CyclicInput.y * cyclingForce;
