@@ -1,70 +1,33 @@
-* **ThrottleInput** - ручка газу / Керування потужністю двигуна
-* **CollectiveInput** - загальний кут установки лопатей несного гвинта, керування висотою
-* **CyclicInput** - Нахиляють ніс вертольота вниз або вгору (рух або гальма). **Pitch** - нахил в ліво або право. **Roll** - наклони вперед та назад
-* **PedalInput** - поворот ліво чи право, хвіст Yaw в ТЗ
+# 🚁 VR Helicopter Physics
 
-* **HP** - кінська сила
-* **Rpm** - обертальний момент
+A physically-driven helicopter flight model built in Unity, rebuilt into an interactive **VR cockpit experience** using OpenXR and the XR Interaction Toolkit.
 
+*Status: in active development, ~80% ready.*
 
+## What it is
 
-# Тестове завдання на посаду Unity Developer
+A from-scratch flight physics simulation — no ready-made flight-controller assets — where the player sits inside a VR cockpit and flies the helicopter using physically modeled rotor forces (lift, torque, drag, tail rotor compensation) instead of scripted movement. The project started as a physics-only prototype and was later extended with a head-tracked VR camera and grabbable, interactable cockpit controls (levers, toggles) that the player operates directly with VR controllers.
 
-**Мета:** Реалізувати фізично коректну модель польоту вертоліта.
+## Tech highlights
 
-**Загальний опис задачі:**  
-Потрібно створити невеликий *playable prototype*, у якому користувач може керувати літальним апаратом у 3D-сцені.
+- **Component-based architecture**: behavior is split across small, replaceable pieces rather than one monolithic controller — `BaseRbController`, `BasePhysics`, `BaseHeliInput`, and `BaseCamera` define the contracts, with concrete implementations (`HeliController`, `MainHeliEngine`, `RotorController`) built on top.
+- **Rotor physics as its own system**: `MainRotor`, `TailRotor`, and `AdvanceMainRotor` model lift, torque generation and tail-rotor compensation independently, with `IRotor` as the shared interface and `RotorBlur` handling the visual blur effect at high RPM.
+- **Decoupled input**: `BaseHeliInput` abstracts control input away from the physics layer, plus a custom in-editor debug tool (`KeyBoardHeliInputDebug`) for testing flight behavior without a headset attached.
+- **VR integration**: built on Unity's XR Interaction Toolkit and OpenXR — head-tracked cockpit camera, and cockpit controls implemented as grabbable/interactable objects rather than UI buttons.
 
----
+## What I learned
 
-### 🎯 Основний акцент
-*   **Фізика руху** (реалістична поведінка сил).
-*   **Керування** (чутливість та відгук).
-*   **Стабільність польоту** (система автовирівнювання).
-*   **Структура коду** та адекватна архітектура.
+- How to model believable rotor aerodynamics (lift, cyclic/collective pitch, torque, drag) from physics fundamentals instead of tuning a black-box asset.
+- How to keep a physics simulation testable on a desktop (keyboard/gamepad) while layering VR-specific interaction on top of the same core, instead of forking the logic per platform.
+- Practical XR Interaction Toolkit patterns for turning physical cockpit controls (levers, toggles) into grabbable VR interactions.
 
----
+## How to run
 
-### 📋 Мінімальні вимоги
+- Unity 6000.2.7f2 (or a current Unity 6 release), HDRP.
+- Open the main scene and press Play.
+- Desktop/no-headset testing: use keyboard controls (`WASD` move, `Space`/`Left Ctrl` collective, `Q`/`E` yaw, arrow keys for blade pitch) via the built-in debug input.
+- VR: connect a headset via OpenXR before entering Play mode to use head tracking and grabbable cockpit controls.
 
-#### 1. Основний рух:
-*   [x] Зліт
-*   [x] Посадка
-*   [x] Зависання (Hover)
-*   [x] Рух вперед / назад
-*   [x] Рух вліво / вправо
-*   [x] Поворот по **Yaw** (пеленг)
-*   [x] Нахили **Pitch** (тангаж) / **Roll** (крен)
+## Origin
 
-#### 2. Фізика компонентів:
-> ⚠️ **Важливо:** Не використовувати готові *flight-controller assets*. Усі розрахунки мають бути чесними.
-*   Підйомна сила (*Lift Force*)
-*   Тяга (*Thrust*)
-*   Гравітація (*Gravity*)
-*   Інерція (*Inertia*)
-*   Опір повітря (*Drag*)
-*   Обертальний момент (*Torque*)
-
-#### 3. Керування (Нова Input System):
-*   `W` `A` `S` `D` — Рух (нахили Cyclic)
-*   `Space` / `Left Ctrl` — Висота (крок гвинта Collective)
-*   `Q` / `E` — Поворот (педалі Yaw)
-*   `UpArrow` / `DownArrrow` - кут нахилу леза
-
----
-
-### 🛠️ Технічні вимоги
-
-*   **Рекомендована версія Unity:** `Unity 6000.2.7f2` (або актуальна версія Unity 6).
-*   **Графічний конвеєр:** `HDRP` (High Definition Render Pipeline).
-*   **Візуал:** Допускається повна реалізація на 3D-примітивах (куби, сфери, циліндри). Головне — логіка, а не графіка.
-
----
-
-### ⏱️ Срок виконання
-**1 тиждень** з моменту отримання даного завдання.
-
-### 📦 Що потрібно здати:
-1. Посилання на публічний **Git-репозиторій** із вихідним кодом проєкту.
-2. **Архів з готовим білдом** під Windows / PC для швидкого тестування.
-
+This project began as a take-home technical assignment (helicopter flight physics on primitives, no VR) and was later extended into a full VR cockpit experience — the physics core carried over unchanged.
